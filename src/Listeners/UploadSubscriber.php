@@ -7,8 +7,10 @@ class UploadSubscriber
 {
     public function subscribe($events)
     {
-        $events->listen(UploadEvent::class, function (){
-            return FileListener::class;
-        });
+        $listener = function (){
+            return \Windmill\Upload\Listeners\FileListener::class;
+        };
+
+        $events->listen(UploadEvent::class, $listener());
     }
 }
